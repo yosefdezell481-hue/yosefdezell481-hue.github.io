@@ -3,64 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yousef Taha - معرض الآيفون</title>
+<title>Yousef Taha - معرض الآيفون الفضائي</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo', sans-serif}
   body{background:#000;color:#fff;overflow-x:hidden}
 
-  /* خلفية فضاء + نجوم + شهب */
-body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071') center/cover fixed;opacity:0.3;z-index:-2}
+  /* خلفية فضاء ثابتة */
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071') center/cover fixed;opacity:0.35;z-index:-2}
 .stars{position:fixed;width:100%;height:100%;z-index:-1}
-.stars span{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 3s infinite}
-.shooting-star{position:absolute;width:2px;height:2px;background:#fff;box-shadow:0 0 10px 2px #fff;animation:shoot 4s linear infinite}
-.shooting-star::after{content:'';position:absolute;width:100px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.8));transform:translateX(-100px)}
-  @keyframes shoot{0%{transform:translate(0,0) rotate(45deg);opacity:0} 10%{opacity:1} 100%{transform:translate(800px,800px) rotate(45deg);opacity:0}}
+.stars span{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;animation:twinkle 4s infinite}
+.shooting-star{position:absolute;width:2px;height:2px;background:#fff;box-shadow:0 0 10px 2px #fff;animation:shoot 5s linear infinite}
+.shooting-star::after{content:'';position:absolute;width:120px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.8));transform:translateX(-120px)}
+  @keyframes shoot{0%{transform:translate(0,0) rotate(45deg);opacity:0} 10%{opacity:1} 100%{transform:translate(900px,900px) rotate(45deg);opacity:0}}
   @keyframes twinkle{0%,100%{opacity:0.2} 50%{opacity:1}}
 
-  header{text-align:center;padding:40px 20px;background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);position:relative;z-index:2}
-  header h1{font-size:40px;color:#fff;text-shadow:0 0 20px #0071e3}
+  header{text-align:center;padding:50px 20px;background:rgba(0,0,0,0.4);backdrop-filter:blur(8px);position:relative;z-index:2}
+  header h1{font-size:42px;color:#fff;text-shadow:0 0 25px #0071e3}
+  header p{color:#aaa;margin-top:10px;font-size:18px}
 
-  /* معرض الفضاء */
-.gallery{max-width:1000px;margin:0 auto;padding:80px 20px;position:relative;z-index:2}
-.planet{display:flex;align-items:center;margin:120px 0;height:400px}
-.planet:nth-child(odd){flex-direction:row}
-.planet:nth-child(even){flex-direction:row-reverse}
+  /* معرض ثابت */
+.gallery{max-width:1100px;margin:0 auto;padding:100px 20px;position:relative;z-index:2}
+.planet{display:flex;align-items:center;justify-content:center;margin:150px 0;height:380px;position:relative}
 
-  /* مجسم الايفون 3D */
-.scene{width:200px;height:350px;perspective:1000px}
-.iphone{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:rotateDevice 15s ease-in-out infinite}
+  /* مجسم الايفون 3D بيلف في مكانه */
+.scene{width:220px;height:380px;perspective:1200px}
+.iphone{width:100%;height:100%;position:relative;transform-style:preserve-3d;animation:floatRotate 12s ease-in-out infinite}
 .planet:hover.iphone{transform:scale(1.15);animation-play-state:paused}
 
   /* اوجه الايفون */
-.face{position:absolute;width:100%;height:100%;border-radius:40px;background-size:cover;background-position:center;box-shadow:inset 0 0 0 2px #333}
-.front{background-image:url('iphone-xs-max.jpg')} /* غير الصورة لكل جهاز */
-.back{background-image:url('iphone-xs-max.jpg');transform:rotateY(180deg) translateZ(10px);filter:brightness(0.9)}
-.left{width:20px;height:100%;background:#222;transform:rotateY(-90deg) translateZ(10px)}
-.right{width:20px;height:100%;background:#222;transform:rotateY(90deg) translateZ(190px)}
+.face{position:absolute;width:100%;height:100%;border-radius:45px;background-size:cover;background-position:center;border:2px solid #333}
+.front{transform:translateZ(10px)}
+.back{transform:rotateY(180deg) translateZ(10px);filter:brightness(0.85)}
+.left{width:20px;height:100%;background:linear-gradient(#222,#444);transform:rotateY(-90deg) translateZ(10px)}
+.right{width:20px;height:100%;background:linear-gradient(#222,#444);transform:rotateY(90deg) translateZ(210px)}
 .top{width:100%;height:20px;background:#111;transform:rotateX(90deg) translateZ(10px)}
-.bottom{width:100%;height:20px;background:#111;transform:rotateX(-90deg) translateZ(340px)}
+.bottom{width:100%;height:20px;background:#111;transform:rotateX(-90deg) translateZ(370px)}
 
-  @keyframes rotateDevice{
-    0%{transform:rotateY(-30deg) rotateX(5deg)}
-    50%{transform:rotateY(30deg) rotateX(-5deg)}
-    100%{transform:rotateY(-30deg) rotateX(5deg)}
+  /* حركة دوران + تعويم في المكان */
+  @keyframes floatRotate{
+    0%{transform:rotateY(-25deg) rotateX(8deg) translateY(0px)}
+    25%{transform:rotateY(25deg) rotateX(-8deg) translateY(-15px)}
+    50%{transform:rotateY(-25deg) rotateX(8deg) translateY(0px)}
+    75%{transform:rotateY(25deg) rotateX(-8deg) translateY(15px)}
+    100%{transform:rotateY(-25deg) rotateX(8deg) translateY(0px)}
   }
 
-  /* هالة */
-.glow{position:absolute;top:50%;left:50%;width:350px;height:350px;background:radial-gradient(circle,rgba(0,113,227,0.2) 0%,transparent 70%);border-radius:50%;transform:translate(-50%,-50%);animation:pulse 3s ease-in-out infinite;z-index:-1}
-  @keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1)} 50%{transform:translate(-50%,-50%) scale(1.2)}}
+  /* هالة نبض */
+.glow{position:absolute;top:50%;left:50%;width:400px;height:400px;background:radial-gradient(circle,rgba(0,113,227,0.25) 0%,transparent 70%);border-radius:50%;transform:translate(-50%,-50%);animation:pulse 4s ease-in-out infinite;z-index:-1}
+  @keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:0.5} 50%{transform:translate(-50%,-50%) scale(1.3);opacity:0.8}}
 
-.info{flex:1;padding:0 50px;text-align:center}
-.info h2{font-size:32px;margin-bottom:10px;color:#fff;text-shadow:0 0 15px #0071e3}
-.info.price{font-size:26px;color:#0071e3;font-weight:bold;margin-bottom:20px}
-.info.btn{padding:12px 30px;background:#25D366;color:#fff;border-radius:12px;text-decoration:none;font-weight:bold;display:inline-block}
+.info{text-align:center;margin-top:30px}
+.info h2{font-size:34px;margin-bottom:10px;color:#fff;text-shadow:0 0 20px #0071e3}
+.info.price{font-size:28px;color:#0071e3;font-weight:bold;margin-bottom:20px}
+.info.btn{padding:14px 35px;background:#25D366;color:#fff;border-radius:14px;text-decoration:none;font-weight:bold;display:inline-block;transition:0.3s;box-shadow:0 0 20px rgba(37,211,102,0.4)}
+.info.btn:hover{transform:scale(1.08)}
 
 .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;padding:60px 20px;max-width:1200px;margin:auto;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);position:relative;z-index:2}
-.card{background:rgba(255,255,255,0.95);color:#1d1d1f;border-radius:18px;padding:20px;text-align:center;cursor:pointer}
+.card{background:rgba(255,255,255,0.95);color:#1d1d1f;border-radius:18px;padding:20px;text-align:center;cursor:pointer;transition:0.4s}
+.card:hover{transform:translateY(-8px)}
 .card img{width:100%;height:240px;object-fit:contain}
 
-#musicBtn{position:fixed;bottom:20px;right:20px;background:#0071e3;color:#fff;border:none;border-radius:50%;width:55px;height:55px;font-size:24px;cursor:pointer;z-index:999}
-.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:none;justify-content:center;align-items:center;z-index:999}
+#musicBtn{position:fixed;bottom:25px;right:25px;background:#0071e3;color:#fff;border:none;border-radius:50%;width:60px;height:60px;font-size:26px;cursor:pointer;z-index:999;box-shadow:0 0 20px #0071e3}
+.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);display:none;justify-content:center;align-items:center;z-index:999}
 .popup-content{background:#fff;color:#000;width:90%;max-width:500px;border-radius:20px;padding:30px;position:relative}
 .close{position:absolute;top:15px;left:20px;font-size:28px;cursor:pointer;color:#999}
 .specs{text-align:right;margin:20px 0}
@@ -72,8 +76,12 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 <div class="stars" id="stars"></div>
 <div id="shootingStars"></div>
 
-<header><h1>Yousef Taha</h1><p>معرض الآيفون - مجسمات 3D</p></header>
+<header>
+  <h1>Yousef Taha</h1>
+  <p>معرض الآيفون - كواكب تدور في الفضاء</p>
+</header>
 
+<!-- معرض ثابت -->
 <section class="gallery">
   <div class="planet">
     <div style="position:relative">
@@ -81,10 +89,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
       <div class="scene"><div class="iphone">
         <div class="face front" style="background-image:url('iphone-xs-max.jpg')"></div>
         <div class="face back" style="background-image:url('iphone-xs-max.jpg')"></div>
-        <div class="face left"></div>
-        <div class="face right"></div>
-        <div class="face top"></div>
-        <div class="face bottom"></div>
+        <div class="face left"></div><div class="face right"></div><div class="face top"></div><div class="face bottom"></div>
       </div></div>
     </div>
     <div class="info"><h2>iPhone X Max</h2><p class="price">10,000 جنيه</p><a href="#" class="btn" onclick="openPopup('xs')">التفاصيل</a></div>
@@ -127,6 +132,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
   </div>
 </section>
 
+<!-- المنتجات -->
 <section class="products">
   <div class="card" onclick="openPopup('xs')"><img src="iphone-xs-max.jpg"><h3>iPhone X Max</h3><p class="price">10,000 جنيه</p></div>
   <div class="card" onclick="openPopup('11pro')"><img src="iphone-11-pro.jpg"><h3>iPhone 11 Pro</h3><p class="price">20,000 جنيه</p></div>
@@ -134,23 +140,37 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
   <div class="card" onclick="openPopup('15')"><img src="iphone-15.jpg"><h3>iPhone 15</h3><p class="price">50,000 جنيه</p></div>
 </section>
 
+<!-- زر الصوت -->
 <button id="musicBtn" onclick="toggleMusic()">🔊</button>
-<audio id="bgMusic" loop><source src="https://cdn.pixabay.com/audio/2024/08/01/audio_4b4e6c3e9a.mp3" type="audio/mpeg"></audio>
+<audio id="spaceSound" loop>
+  <source src="https://cdn.pixabay.com/audio/2025/04/10/audio_2f3b4c5d6e.mp3" type="audio/mpeg">
+</audio>
 
+<!-- البوب اب -->
 <div id="popup" class="popup" onclick="closePopup()"><div class="popup-content" onclick="event.stopPropagation()"><span class="close" onclick="closePopup()">&times;</span><div id="popup-data"></div></div></div>
 
 <footer>© 2026 Yousef Taha. للتواصل: 01142967322 | الإسكندرية</footer>
 
 <script>
-// نجوم + شهب
+// نجوم عشوائية
 const stars = document.getElementById('stars');
-for(let i=0;i<100;i++){let s=document.createElement('span');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*3+'s';stars.appendChild(s);}
-const shootingContainer = document.getElementById('shootingStars');
-function createShootingStar(){let s=document.createElement('div');s.className='shooting-star';s.style.top=Math.random()*50+'%';s.style.left='-100px';shootingContainer.appendChild(s);setTimeout(()=>s.remove(),4000);}
-setInterval(createShootingStar,2000);
+for(let i=0;i<120;i++){let s=document.createElement('span');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*4+'s';stars.appendChild(s);}
 
-// موسيقى
-let musicPlaying=false;function toggleMusic(){const m=document.getElementById('bgMusic');if(musicPlaying){m.pause();musicPlaying=false;document.getElementById('musicBtn').innerText='🔇'}else{m.play();musicPlaying=true;document.getElementById('musicBtn').innerText='🔊'}}
+// شهب
+const shootingContainer = document.getElementById('shootingStars');
+function createShootingStar(){let s=document.createElement('div');s.className='shooting-star';s.style.top=Math.random()*60+'%';s.style.left='-150px';shootingContainer.appendChild(s);setTimeout(()=>s.remove(),5000);}
+setInterval(createShootingStar,2500);
+
+// اصوات الفضاء
+let musicPlaying=false;
+function toggleMusic(){
+  const m=document.getElementById('spaceSound');
+  m.volume=0.4; // واطي عشان يبقى اجواء
+  if(musicPlaying){m.pause();musicPlaying=false;document.getElementById('musicBtn').innerText='🔇'}
+  else{m.play();musicPlaying=true;document.getElementById('musicBtn').innerText='🔊'}
+}
+// تشغيل تلقائي بعد اول كليكة
+document.addEventListener('click',()=>{if(!musicPlaying) toggleMusic()},{once:true})
 
 const phones = {
   xs: {name: "iPhone X Max", price: "10,000 جنيه", img: "iphone-xs-max.jpg", specs: ["الشاشة: 6.5 بوصة OLED", "الرام: 4 جيجا", "المساحة: 64 / 256 جيجا", "الكاميرا: كاميرتين 12 ميجا", "المعالج: A12 Bionic", "البطارية: 3174 مللي أمبير"]},
