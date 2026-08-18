@@ -6,31 +6,54 @@
 <title>Yousef Taha - بيع آيفونات أصلية</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo', sans-serif}
-  body{background:#f5f5f7;color:#1d1d1f}
-  header{background:#000;color:#fff;padding:25px;text-align:center}
-  header h1{font-size:32px;letter-spacing:1px}
+  body{background:#000;color:#fff;overflow-x:hidden}
+
+  header{background:#000;color:#fff;padding:20px;text-align:center;z-index:10;position:relative}
+  header h1{font-size:32px}
   header p{color:#aaa;margin-top:5px}
 
- .products{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;padding:40px 20px;max-width:1200px;margin:auto}
+  /* منطقة العرض 3D */
+.hero{height:80vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at center,#1a1a1a 0%,#000 100%);position:relative}
+.stage{position:relative;width:300px;height:400px;perspective:1200px}
 
- .card{background:#fff;border-radius:18px;padding:20px;text-align:center;box-shadow:0 8px 25px rgba(0,0,0,0.12);transition:0.4s;cursor:pointer;transform-style:preserve-3d}
- .card:hover{transform:translateY(-8px) rotateX(5deg);box-shadow:0 15px 35px rgba(0,0,0,0.2)}
- .card img{width:100%;height:240px;object-fit:contain;background:#fff}
- .card h3{margin:12px 0;font-size:20px}
- .price{color:#0071e3;font-weight:bold;font-size:22px;margin:8px 0}
- .btn{display:inline-block;margin-top:10px;padding:12px 25px;background:#25D366;color:#fff;border-radius:10px;text-decoration:none;font-weight:bold}
- .btn:hover{background:#1ebe5d}
+.phone{position:absolute;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0}
+.phone img{width:230px;height:330px;object-fit:contain;position:relative;z-index:2;animation:spin 10s ease-in-out}
+.phone h2{margin-top:20px;font-size:26px;color:#fff;text-shadow:0 0 10px #0071e3;animation:spin 10s ease-in-out}
+.phone p{color:#0071e3;font-size:22px;font-weight:bold;animation:spin 10s ease-in-out}
 
-  /* نافذة البوب اب */
- .popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:none;justify-content:center;align-items:center;z-index:999;backdrop-filter:blur(5px)}
- .popup-content{background:#fff;width:90%;max-width:500px;border-radius:20px;padding:30px;position:relative;animation:popupIn 0.4s ease;transform:perspective(1000px) rotateX(0)}
-  @keyframes popupIn{from{opacity:0;transform:perspective(1000px) rotateX(-20deg) scale(0.9)} to{opacity:1;transform:perspective(1000px) rotateX(0) scale(1)}}
- .close{position:absolute;top:15px;left:20px;font-size:28px;cursor:pointer;color:#999}
- .popup img{width:100%;height:280px;object-fit:contain}
- .specs{text-align:right;margin:20px 0}
- .specs p{margin:8px 0;padding:10px;background:#f5f5f7;border-radius:10px;font-size:15px}
- .specs strong{color:#0071e3}
+  /* هالة الضوء */
+.glow{position:absolute;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(0,113,227,0.4) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:glowRotate 10s linear infinite;z-index:1}
+  @keyframes glowRotate{0%{transform:translate(-50%,-50%) rotate(0deg)} 100%{transform:translate(-50%,-50%) rotate(360deg)}}
 
+  @keyframes spin{0%{transform:rotateY(0deg)} 50%{transform:rotateY(720deg)} 100%{transform:rotateY(720deg)}}
+  @keyframes fadeInOut{0%,15%{opacity:1} 25%,100%{opacity:0}}
+
+  /* توقيت كل جهاز */
+.phone:nth-child(1){animation:fadeInOut 20s infinite; animation-delay:0s}
+.phone:nth-child(1) img,.phone:nth-child(1) h2,.phone:nth-child(1) p,.phone:nth-child(1).glow{animation-delay:0s}
+.phone:nth-child(2){animation:fadeInOut 20s infinite; animation-delay:5s}
+.phone:nth-child(2) img,.phone:nth-child(2) h2,.phone:nth-child(2) p,.phone:nth-child(2).glow{animation-delay:5s}
+.phone:nth-child(3){animation:fadeInOut 20s infinite; animation-delay:10s}
+.phone:nth-child(3) img,.phone:nth-child(3) h2,.phone:nth-child(3) p,.phone:nth-child(3).glow{animation-delay:10s}
+.phone:nth-child(4){animation:fadeInOut 20s infinite; animation-delay:15s}
+.phone:nth-child(4) img,.phone:nth-child(4) h2,.phone:nth-child(4) p,.phone:nth-child(4).glow{animation-delay:15s}
+
+  /* باقي الموقع */
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;padding:60px 20px;max-width:1200px;margin:auto;background:#f5f5f7}
+.card{background:#fff;color:#1d1d1f;border-radius:18px;padding:20px;text-align:center;box-shadow:0 8px 25px rgba(0,0,0,0.12);transition:0.4s;cursor:pointer}
+.card:hover{transform:translateY(-8px)}
+.card img{width:100%;height:240px;object-fit:contain}
+.card h3{margin:12px 0;font-size:20px;color:#000}
+.price{color:#0071e3;font-weight:bold;font-size:22px}
+.btn{display:inline-block;margin-top:10px;padding:12px 25px;background:#25D366;color:#fff;border-radius:10px;text-decoration:none;font-weight:bold}
+
+.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);display:none;justify-content:center;align-items:center;z-index:999}
+.popup-content{background:#fff;color:#000;width:90%;max-width:500px;border-radius:20px;padding:30px;position:relative;animation:popupIn 0.4s ease}
+  @keyframes popupIn{from{opacity:0;transform:scale(0.9)} to{opacity:1;transform:scale(1)}}
+.close{position:absolute;top:15px;left:20px;font-size:28px;cursor:pointer;color:#999}
+.popup img{width:100%;height:280px;object-fit:contain}
+.specs{text-align:right;margin:20px 0}
+.specs p{margin:8px 0;padding:10px;background:#f5f5f7;border-radius:10px}
   footer{text-align:center;padding:25px;background:#000;color:#aaa}
 </style>
 </head>
@@ -40,30 +63,47 @@
   <p>أفضل أسعار الآيفون المستعمل والجديد في الإسكندرية</p>
 </header>
 
+<!-- عرض 3D -->
+<section class="hero">
+  <div class="stage">
+    <div class="phone">
+      <div class="glow"></div>
+      <img src="iphone-xs-max.jpg" alt="iPhone X Max">
+      <h2>iPhone X Max</h2>
+      <p>10,000 جنيه</p>
+    </div>
+    <div class="phone">
+      <div class="glow"></div>
+      <img src="iphone-11-pro.jpg" alt="iPhone 11 Pro">
+      <h2>iPhone 11 Pro</h2>
+      <p>20,000 جنيه</p>
+    </div>
+    <div class="phone">
+      <div class="glow"></div>
+      <img src="iphone-12.jpg" alt="iPhone 12">
+      <h2>iPhone 12</h2>
+      <p>22,000 جنيه</p>
+    </div>
+    <div class="phone">
+      <div class="glow"></div>
+      <img src="iphone-15.jpg" alt="iPhone 15">
+      <h2>iPhone 15</h2>
+      <p>50,000 جنيه</p>
+    </div>
+  </div>
+</section>
+
+<!-- الموسيقى -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/audio/2025/04/24/audio_9c3f1b5b3e.mp3" type="audio/mpeg">
+</audio>
+
+<!-- المنتجات -->
 <section class="products">
-  <div class="card" onclick="openPopup('xs')">
-    <img src="iphone-xs-max.jpg" alt="iPhone X Max">
-    <h3>iPhone X Max</h3>
-    <p class="price">10,000 جنيه</p>
-  </div>
-
-  <div class="card" onclick="openPopup('11pro')">
-    <img src="iphone-11-pro.jpg" alt="iPhone 11 Pro">
-    <h3>iPhone 11 Pro</h3>
-    <p class="price">20,000 جنيه</p>
-  </div>
-
-  <div class="card" onclick="openPopup('12')">
-    <img src="iphone-12.jpg" alt="iPhone 12">
-    <h3>iPhone 12</h3>
-    <p class="price">22,000 جنيه</p>
-  </div>
-
-  <div class="card" onclick="openPopup('15')">
-    <img src="iphone-15.jpg" alt="iPhone 15">
-    <h3>iPhone 15</h3>
-    <p class="price">50,000 جنيه</p>
-  </div>
+  <div class="card" onclick="openPopup('xs')"><img src="iphone-xs-max.jpg"><h3>iPhone X Max</h3><p class="price">10,000 جنيه</p></div>
+  <div class="card" onclick="openPopup('11pro')"><img src="iphone-11-pro.jpg"><h3>iPhone 11 Pro</h3><p class="price">20,000 جنيه</p></div>
+  <div class="card" onclick="openPopup('12')"><img src="iphone-12.jpg"><h3>iPhone 12</h3><p class="price">22,000 جنيه</p></div>
+  <div class="card" onclick="openPopup('15')"><img src="iphone-15.jpg"><h3>iPhone 15</h3><p class="price">50,000 جنيه</p></div>
 </section>
 
 <!-- البوب اب -->
@@ -74,55 +114,33 @@
   </div>
 </div>
 
-<footer>
-  © 2026 Yousef Taha. للتواصل: 01142967322 | الإسكندرية
-</footer>
+<footer>© 2026 Yousef Taha. للتواصل: 01142967322 | الإسكندرية</footer>
 
 <script>
-const phones = {
-  xs: {
-    name: "iPhone X Max",
-    price: "10,000 جنيه",
-    img: "iphone-xs-max.jpg",
-    specs: ["الشاشة: 6.5 بوصة Super Retina OLED", "الرام: 4 جيجا", "المساحة: 64 / 256 جيجا", "الكاميرا: كاميرتين 12 ميجا", "المعالج: A12 Bionic", "البطارية: 3174 مللي أمبير"]
-  },
-  '11pro': {
-    name: "iPhone 11 Pro",
-    price: "20,000 جنيه",
-    img: "iphone-11-pro.jpg",
-    specs: ["الشاشة: 5.8 بوصة Super Retina XDR", "الرام: 4 جيجا", "المساحة: 64 / 256 / 512 جيجا", "الكاميرا: 3 كاميرات 12 ميجا", "المعالج: A13 Bionic", "البطارية: 3046 مللي أمبير"]
-  },
-  '12': {
-    name: "iPhone 12",
-    price: "22,000 جنيه",
-    img: "iphone-12.jpg",
-    specs: ["الشاشة: 6.1 بوصة Super Retina XDR", "الرام: 4 جيجا", "المساحة: 64 / 128 / 256 جيجا", "الكاميرا: كاميرتين 12 ميجا", "المعالج: A14 Bionic 5G", "البطارية: 2815 مللي أمبير"]
-  },
-  '15': {
-    name: "iPhone 15",
-    price: "50,000 جنيه",
-    img: "iphone-15.jpg",
-    specs: ["الشاشة: 6.1 بوصة Super Retina XDR", "الرام: 6 جيجا", "المساحة: 128 / 256 / 512 جيجا", "الكاميرا: 48 ميجا + 12 ميجا", "المعالج: A16 Bionic", "البطارية: 3349 مللي أمبير + Type-C"]
-  }
-};
+// تشغيل الموسيقى اول ما المستخدم يتفاعل
+document.addEventListener('click', () => {
+  const music = document.getElementById('bgMusic');
+  if(music.paused) music.play().catch(()=>{});
+}, {once: true});
 
+const phones = {
+  xs: {name: "iPhone X Max", price: "10,000 جنيه", img: "iphone-xs-max.jpg", specs: ["الشاشة: 6.5 بوصة OLED", "الرام: 4 جيجا", "المساحة: 64 / 256 جيجا", "الكاميرا: كاميرتين 12 ميجا", "المعالج: A12 Bionic", "البطارية: 3174 مللي أمبير"]},
+  '11pro': {name: "iPhone 11 Pro", price: "20,000 جنيه", img: "iphone-11-pro.jpg", specs: ["الشاشة: 5.8 بوصة XDR", "الرام: 4 جيجا", "المساحة: 64 / 256 / 512 جيجا", "الكاميرا: 3 كاميرات 12 ميجا", "المعالج: A13 Bionic", "البطارية: 3046 مللي أمبير"]},
+  '12': {name: "iPhone 12", price: "22,000 جنيه", img: "iphone-12.jpg", specs: ["الشاشة: 6.1 بوصة XDR", "الرام: 4 جيجا", "المساحة: 64 / 128 / 256 جيجا", "الكاميرا: كاميرتين 12 ميجا", "المعالج: A14 Bionic 5G", "البطارية: 2815 مللي أمبير"]},
+  '15': {name: "iPhone 15", price: "50,000 جنيه", img: "iphone-15.jpg", specs: ["الشاشة: 6.1 بوصة XDR", "الرام: 6 جيجا", "المساحة: 128 / 256 / 512 جيجا", "الكاميرا: 48 ميجا + 12 ميجا", "المعالج: A16 Bionic", "البطارية: 3349 مللي أمبير + Type-C"]}
+};
 function openPopup(id) {
   const phone = phones[id];
   document.getElementById('popup-data').innerHTML = `
     <img src="${phone.img}" alt="${phone.name}">
     <h2 style="text-align:center;margin:15px 0">${phone.name}</h2>
     <p style="text-align:center;font-size:24px;color:#0071e3;font-weight:bold">${phone.price}</p>
-    <div class="specs">
-      ${phone.specs.map(s => `<p><strong>✓</strong> ${s}</p>`).join('')}
-    </div>
+    <div class="specs">${phone.specs.map(s => `<p><strong>✓</strong> ${s}</p>`).join('')}</div>
     <a href="https://wa.me/201142967322?text=عايز ${phone.name}" class="btn" style="width:100%;text-align:center">اطلب عبر واتساب</a>
   `;
   document.getElementById('popup').style.display = 'flex';
 }
-
-function closePopup() {
-  document.getElementById('popup').style.display = 'none';
-}
+function closePopup() {document.getElementById('popup').style.display = 'none';}
 </script>
 </body>
 </html>
